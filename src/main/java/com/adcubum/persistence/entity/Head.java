@@ -1,4 +1,9 @@
 package com.adcubum.persistence.entity;
 
-public interface Head {
+import java.util.Collection;
+
+public interface Head<S extends State> {
+
+    Collection<S> getStates();
+
 }
