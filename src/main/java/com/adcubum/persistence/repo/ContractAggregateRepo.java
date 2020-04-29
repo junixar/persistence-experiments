@@ -9,6 +9,6 @@ public interface ContractAggregateRepo {
 
     public Optional<ContractState> findById(String contractId, LocalDate keyDate);
 
-    public ContractState save(ContractState contractState);
+    public void save(ContractState contractState);
 
 }

@@ -22,7 +22,8 @@ class ContractAggregateRepoImplTest {
     void saveShouldCreateNewStatesForContractAndContractParts() {
         //given
 
-//        LocalDate
+        LocalDate dateOfChange = LocalDate.of(2019, 12, 1);
+        LocalDate stateBeginForAll = LocalDate.of(2020, 1, 1);
 
         ContractState contractState = new ContractState();
         Contract contract = new Contract();
