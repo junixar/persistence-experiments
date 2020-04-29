@@ -21,9 +21,9 @@ public class InsuredObject implements Head<InsuredObjectState> {
     @JoinColumn(name = "insured_object_id")
     public Collection<InsuredObjectState> states;
 
-    public LocalDate begin;
+    public LocalDate validFrom;
 
-    public LocalDate end;
+    public LocalDate validTo;
 
     @Override
     public Collection<InsuredObjectState> getStates() {

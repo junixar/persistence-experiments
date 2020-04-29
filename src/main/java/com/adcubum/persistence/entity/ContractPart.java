@@ -22,9 +22,9 @@ public class ContractPart implements Head<ContractPartState> {
     @JoinColumn(name = "contract_part_id")
     public Collection<InsuredObjectState> insuredObjects;
 
-    public LocalDate begin;
+    public LocalDate validFrom;
 
-    public LocalDate end;
+    public LocalDate validTo;
 
     @Override
     public Collection<ContractPartState> getStates() {

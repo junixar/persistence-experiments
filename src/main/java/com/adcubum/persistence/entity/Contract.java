@@ -23,11 +23,11 @@ public class Contract implements Head<ContractState> {
 
     @OneToMany
     @JoinColumn(name = "contract_id")
-    public Collection<ContractPartState> contractParts;
+    public Collection<ContractPartState> contractPartStates;
 
-    public LocalDate begin;
+    public LocalDate validFrom;
 
-    public LocalDate end;
+    public LocalDate validTo;
 
     @Override
     public Collection<ContractState> getStates() {

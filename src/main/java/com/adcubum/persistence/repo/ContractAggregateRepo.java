@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface ContractAggregateRepo {
 
-    public Optional<ContractState> findById(String id, LocalDate keyDate);
+    public Optional<ContractState> findById(String contractId, LocalDate keyDate);
 
-    public void save(ContractState contractState);
+    public ContractState save(ContractState contractState);
 
 }
