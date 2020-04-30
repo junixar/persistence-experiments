@@ -31,8 +31,13 @@ public class ContractAggregateRepoImpl implements ContractAggregateRepo {
             useCase1CreateNewContractAndNewContractState(contractState);
         } else {
 
+            //detect existing (the same begin/end dates) state with or without changes in content
+
+            //the case with termination of the state is still nor clarified.
+            //For MVP we could update the existing state (business attributes as well as state_end), identified by id
+
             for (ContractState touchedState : touchedStates) {
-                if (touchedState.stateBegin.isBefore(contractState.stateBegin) && touchedState.stateEnd.isAfter(contractState.stateBegin)) {
+                if (touchedState.stateBegin.isBefore(contractState.stateBegin) && !touchedState.stateEnd.isAfter(contractState.stateEnd)) {
                     //i.e. touchedState.stateBegin==01.01.2020 and touchedState.stateEnd==31.01.2020
                     // contractState.stateBegin==15.01.2020 and contractState.stateEnd==31.12.2020
                     terminateStateToGivenDate(touchedState, contractState.stateBegin);
