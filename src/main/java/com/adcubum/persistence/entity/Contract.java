@@ -1,11 +1,15 @@
 package com.adcubum.persistence.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Set;
+
+import org.hibernate.annotations.Filter;
 
 @Entity
 public class Contract implements Head<ContractState> {
@@ -15,15 +19,14 @@ public class Contract implements Head<ContractState> {
 
     public String contractNo;
 
-    public String productId;
-
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id")
-    public Collection<ContractState> states;
+    public Set<ContractState> states;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id")
-    public Collection<ContractPartState> contractPartStates;
+//    @Filter(name = "state")
+    public Set<ContractPartState> contractPartStates;
 
     public LocalDate validFrom;
 

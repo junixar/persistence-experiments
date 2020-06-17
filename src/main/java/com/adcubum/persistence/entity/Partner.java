@@ -1,5 +1,7 @@
 package com.adcubum.persistence.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
@@ -7,10 +9,14 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@FilterDef(name="state", parameters=@ParamDef( name="keyDate", type="timestamp" ))
 @Audited
+@NamedEntityGraphs({
+      @NamedEntityGraph(name = "partner",
+            attributeNodes = {@NamedAttributeNode("states")})
+})
 public class Partner implements Head {
 
     @Id
@@ -21,10 +27,9 @@ public class Partner implements Head {
     @Version
     public Long version;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="PARTNER_ID")
+    @OneToMany(mappedBy = "partner", fetch = FetchType.EAGER)
     @Filter(name="state", condition=":keyDate BETWEEN state_begin AND state_end")
-    public Collection<PartnerState> states;
+    public Set<PartnerState> states;
 
     @Override
     public Collection<PartnerState> getStates() {

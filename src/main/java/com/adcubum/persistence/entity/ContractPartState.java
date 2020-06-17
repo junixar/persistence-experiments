@@ -2,6 +2,7 @@ package com.adcubum.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,16 +14,13 @@ public class ContractPartState implements State<ContractPart> {
     public String id;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     public ContractPart contractPart;
 
     @ManyToOne
     public Contract contract;
 
-    public String description;
-
-    public BigDecimal premium;
-
-    public String offerNo;
+    public Integer premium;
 
     public LocalDate stateBegin;
 

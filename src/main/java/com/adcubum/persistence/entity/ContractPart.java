@@ -3,6 +3,7 @@ package com.adcubum.persistence.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class ContractPart implements Head<ContractPartState> {
@@ -12,11 +13,9 @@ public class ContractPart implements Head<ContractPartState> {
 
     public String productPartId;
 
-    public String billingAddress;
-
     @OneToMany
     @JoinColumn(name = "contract_part_id")
-    public Collection<ContractPartState> states;
+    public Set<ContractPartState> states;
 
     @OneToMany
     @JoinColumn(name = "contract_part_id")
