@@ -1,34 +1,29 @@
 package com.adcubum.persistence.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class ContractState implements State<Contract> {
+public class ContractState {
 
-    @Id
-    public String id;
+   @Id
+   public String id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    @Fetch(FetchMode.JOIN)
-    public Contract contract;
+   @ManyToOne
+   public Contract contract;
 
-    public String offerNo;
+   public LocalDate validFrom;
 
-    public LocalDate stateBegin;
+   public LocalDate validTo;
 
-    public LocalDate stateEnd;
+   @Enumerated(EnumType.STRING)
+   public DataState dataState;
 
-    @Override
-    public Contract getHead() {
-        return contract;
-    }
+   public String processId;
+
 }

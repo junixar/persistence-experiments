@@ -1,39 +1,24 @@
 package com.adcubum.persistence.entity;
 
+import java.time.LocalDate;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Set;
-
-import org.hibernate.annotations.Filter;
 
 @Entity
-public class Contract implements Head<ContractState> {
+public class Contract {
 
-    @Id
-    public String id;
+   @Id
+   public String id;
 
-    public String contractNo;
+   public LocalDate validFrom;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_id")
-    public Set<ContractState> states;
+   public LocalDate validTo;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_id")
-//    @Filter(name = "state")
-    public Set<ContractPartState> contractPartStates;
-
-    public LocalDate validFrom;
-
-    public LocalDate validTo;
-
-    @Override
-    public Collection<ContractState> getStates() {
-        return states;
-    }
+   @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   public Set<ContractState> states;
 }
