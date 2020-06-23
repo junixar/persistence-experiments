@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="yy" id="data_structures">
+
+    	<createTable tableName="contract">
+        	<column name="id" type="varchar(36)"/>
+        	<column name="boid" type="varchar(36)"/>
+			<column name="state_begin" type="date"/>
+			<column name="state_end" type="date"/>
+        	<column name="payload" type="varchar(255)"/>
+    	</createTable>
+    	<addPrimaryKey columnNames="id" constraintName="contract_pk" tableName="contract"/>
+
+		<createTable tableName="contract_part">
+			<column name="id" type="varchar(36)"/>
+			<column name="boid" type="varchar(36)"/>
+			<column name="contract_boid" type="varchar(36)"/>
+			<column name="state_begin" type="date"/>
+			<column name="state_end" type="date"/>
+			<column name="payload" type="varchar(255)"/>
+		</createTable>
+		<addPrimaryKey columnNames="id" constraintName="contract_part_pk" tableName="contract_part"/>
+
+		<createTable tableName="insured_object">
+			<column name="id" type="varchar(36)"/>
+			<column name="boid" type="varchar(36)"/>
+			<column name="contract_boid" type="varchar(36)"/>
+			<column name="contract_part_boid" type="varchar(36)"/>
+			<column name="state_begin" type="date"/>
+			<column name="state_end" type="date"/>
+			<column name="payload" type="varchar(255)"/>
+		</createTable>
+		<addPrimaryKey columnNames="id" constraintName="contract_part_pk" tableName="contract_part"/>
+
+	</changeSet>
+
+</databaseChangeLog>
+
+
+
+

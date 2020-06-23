@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id 'org.liquibase.gradle' version '2.0.1'
+	id 'org.liquibase.gradle' version '2.0.3'
 }
 
 group = 'com.adcubum'
@@ -32,9 +32,12 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.assertj:assertj-core:3.15.0'
-	liquibaseRuntime 'org.liquibase:liquibase-core:3.5.5'
-	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.0.1'
+	liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
+	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
 	liquibaseRuntime 'org.postgresql:postgresql'
+	liquibaseRuntime("ch.qos.logback:logback-core:1.2.3")
+	liquibaseRuntime("ch.qos.logback:logback-classic:1.2.3")
+	liquibaseRuntime group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 	implementation 'org.liquibase:liquibase-core'
 
 	implementation ("org.hibernate:hibernate-envers")
@@ -44,14 +47,13 @@ dependencies {
 liquibase {
 	activities {
 		main {
-			changeLogFile 'src/main/resources/db/changelog/db.changelog-master.xml'
+			changeLogFile 'file:src/main/resources/db/changelog/db.changelog-master.xml'
 			url 'jdbc:postgresql://localhost:5432/partner_address'
 			username 'postgres'
 			password 'changeme'
 		}
 	}
 }
-
 
 test {
 	useJUnitPlatform()
