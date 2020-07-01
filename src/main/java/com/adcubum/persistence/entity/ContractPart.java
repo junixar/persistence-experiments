@@ -1,32 +1,30 @@
 package com.adcubum.persistence.entity;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.Type;
 
 @Entity
-public class ContractPart implements Head<ContractPartState> {
+public class ContractPart {
 
-    @Id
-    public String id;
+   @Id
+   @Type(type = "uuid-char")
+   public UUID id;
 
-    public String productPartId;
+   @Type(type = "uuid-char")
+   public UUID boid;
 
-    @OneToMany
-    @JoinColumn(name = "contract_part_id")
-    public Set<ContractPartState> states;
+   @Type(type = "uuid-char")
+   public UUID contractBoid;
 
-    @OneToMany
-    @JoinColumn(name = "contract_part_id")
-    public Collection<InsuredObjectState> insuredObjects;
+   public LocalDate stateBegin;
 
-    public LocalDate validFrom;
+   public LocalDate stateEnd;
 
-    public LocalDate validTo;
+   public String payload;
 
-    @Override
-    public Collection<ContractPartState> getStates() {
-        return states;
-    }
 }

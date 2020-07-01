@@ -35,7 +35,7 @@
 			<column name="state_end" type="date"/>
 			<column name="payload" type="varchar(255)"/>
 		</createTable>
-		<addPrimaryKey columnNames="id" constraintName="contract_part_pk" tableName="contract_part"/>
+		<addPrimaryKey columnNames="id" constraintName="insured_object_pk" tableName="insured_object"/>
 
 	</changeSet>
 

@@ -1,39 +1,37 @@
 package com.adcubum.persistence.entity;
 
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Set;
 
-import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.Type;
 
 @Entity
-public class Contract implements Head<ContractState> {
+public class Contract {
 
-    @Id
-    public String id;
+   @Id
+   @Type(type = "uuid-char")
+   public UUID id;
 
-    public String contractNo;
+   @Column(columnDefinition = "CHAR(36)")
+   @Type(type = "uuid-char")
+   public UUID boid;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_id")
-    public Set<ContractState> states;
+   public LocalDate stateBegin;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_id")
-//    @Filter(name = "state")
-    public Set<ContractPartState> contractPartStates;
+   public LocalDate stateEnd;
 
-    public LocalDate validFrom;
+   public String payload;
 
-    public LocalDate validTo;
+   @OneToMany(fetch = FetchType.LAZY)
+   @JoinColumn(name = "contractBoid")
+   public Set<ContractPart> contractParts;
 
-    @Override
-    public Collection<ContractState> getStates() {
-        return states;
-    }
 }
